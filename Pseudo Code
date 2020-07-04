@@ -54,3 +54,38 @@ CROSSOVER_TIMETABLES(departmentId, timeTable1, timeTable2):
         else:
             newCrossoverTimeTable.classes[i] = timeTable2.classes[i]
     return newCrossoverTimeTable
+
+ CROSSOVER_POPULATION_OF_TIMETABLES(population,departmentId):
+    newCrossoverTimeTablesPopulation = GENERATE_POPULATION_OF_TIMETABLES(0,departmentId)
+    for i in range(NUMB_OF_ELITE_SCHEDULES):
+        crossover_pop.get_schedules().append(pop.get_schedules()[i])
+    i = NUMB_OF_ELITE_SCHEDULES
+    while i < POPULATION_SIZE:
+        timeTable = TOURNAMENT_OF_POPULATION(population)
+        timeTable1 = timeTable[0]
+        timeTable = TOURNAMENT_OF_POPULATION(population)
+        timeTable2 = timeTable[0]
+        newCrossoverTimeTablesPopulation.append(CROSSOVER_TIMETABLES(departmentId,timeTable1, timeTable2))
+        i += 1
+    return newCrossoverTimeTablesPopulation
+
+MUTATE_POPULATION_OF_TIMETABLES(departmentId,crossoverTimeTablesPopulation):
+for i in range(1, POPULATION_SIZE):
+    newMutatedTimeTable = GENERATE_TIMETABLE(departmentId)
+    for j in 1 to newmutatedTimeTable.classes.length:
+        if MUTATION_RATE > random(0 to 1):
+            crossoverTimeTablesPopulation[i].classes[j] = newMutatedTimeTable.classes[j]
+return crossoverTimeTablePopulation
+
+EVALUATE(departmentId, population):
+    return MUTATE_POPULATION_OF_TIMETABLES(departmentId,CROSSOVER_POPULATION_OF_TIMETABLES(population,departmentId))
+
+
+GENETIC_ALGORITHM(departmentId):
+    timeTables = []
+    poplutaion = GENERATE_POPULATION_OF_TIMETABLES(POP_SIZE, departmentId)
+    sort timeTables in population according to fitness and also in reverse order
+    while poplutaion[0].fitness != 1:
+        poplutaion = EVALUATE(departmentId,poplutaion)
+        sort timetables in population according to fitness and also in reverse order
+    return poplutaion[0]
