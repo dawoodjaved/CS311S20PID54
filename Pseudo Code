@@ -1,0 +1,56 @@
+TOURNAMENT_SELECTION_SIZE = 3
+POPULATION_SIZE = 9
+MUTATION_RATE = 0.05
+
+INITILIZE_TIMETABLE(departmentId):
+    department =  A Specific Department with id departmentId
+    sections[] = department.sections
+    initialize classesArray[]
+    for section in sections:
+        for course in section.courses:
+            for i in 1 to course.creditHours:
+                class = Class(group = section,department = department, course = course)
+                class.room = randomly selected one of the room from derpartment.rooms
+                class.Timeslot = randomly selected one of the timeSolts department.timeSlots
+                classesArray.append(class)
+    return classesArray
+GENERATE_POPULATION_OF_TIMETABLES(populationSize,departmentId):
+    timeTables[1...populationSize]
+    for i in 1 to populationSize:
+        timeTables[i].classes = INITILIZE_TIMETABLE(DEPT_ID)
+    return timeTables
+
+CALCULATE_FITNESS(timeTable):
+    noOfConflicts = 0
+    classes = timeTable.classes
+    for i in 1 to classes.length:
+        for j in range(i to classes.length):
+            if classes[i].timeSlot == classes[j].timeSlot:
+                if classes[i].group == classes[j].group
+                    noOfConflicts += 1
+                if classes[i].course == classes[j].course
+                    noOfConflicts += 1
+                if classes[i].room == classes[j].room
+                    noOfConflicts += 1
+    culculatedFitness = 1 / (1.0 * noOfConflicts + 1)
+    return calculatedFitness
+
+
+TOURNAMENT_OF_POPULATION(population):
+    newTimeTablesPopulation = GENERATE_POPULATION_OF_TIMETABLES(populationSize,departmentId)
+    i = 0
+    while i < TOURNAMENT_SELECTION_SIZE:
+        newTimeTablesPopulation.append(population[random from 0 to POPULATION_SIZE])
+        i += 1
+    sort newTimeTablesPopulation according to fitness in reverse order
+    return newTimeTablesPopulation
+
+
+CROSSOVER_TIMETABLES(departmentId, timeTable1, timeTable2):
+    newCrossoverTimeTable = INITILIZE_TIMETABLE(departmentId)
+    for i in range(0, length of classes Array of newCrossoverTimeTable):
+        if random(0 to 1) > 0.5:
+            newCrossoverTimeTable.classes[i] = timeTable1.classes[i]
+        else:
+            newCrossoverTimeTable.classes[i] = timeTable2.classes[i]
+    return newCrossoverTimeTable
