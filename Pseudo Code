@@ -1,91 +1,96 @@
-TOURNAMENT_SELECTION_SIZE = 3
-POPULATION_SIZE = 9
-MUTATION_RATE = 0.05
+//we input following inputs of names of courses along with their courseCreditHours 
+//and the instructors who will teach this course. And input Dailyworkinghours 
+//and a list of room numbers in which theses course can teach
 
-INITILIZE_TIMETABLE(departmentId):
-    department =  A Specific Department with id departmentId
-    sections[] = department.sections
-    initialize classesArray[]
-    for section in sections:
-        for course in section.courses:
-            for i in 1 to course.creditHours:
-                class = Class(group = section,department = department, course = course)
-                class.room = randomly selected one of the room from derpartment.rooms
-                class.Timeslot = randomly selected one of the timeSolts department.timeSlots
-                classesArray.append(class)
-    return classesArray
-GENERATE_POPULATION_OF_TIMETABLES(populationSize,departmentId):
-    timeTables[1...populationSize]
-    for i in 1 to populationSize:
-        timeTables[i].classes = INITILIZE_TIMETABLE(DEPT_ID)
-    return timeTables
-
-CALCULATE_FITNESS(timeTable):
-    noOfConflicts = 0
-    classes = timeTable.classes
-    for i in 1 to classes.length:
-        for j in range(i to classes.length):
-            if classes[i].timeSlot == classes[j].timeSlot:
-                if classes[i].group == classes[j].group
-                    noOfConflicts += 1
-                if classes[i].course == classes[j].course
-                    noOfConflicts += 1
-                if classes[i].room == classes[j].room
-                    noOfConflicts += 1
-    culculatedFitness = 1 / (1.0 * noOfConflicts + 1)
-    return calculatedFitness
+//length of timeslots array depends upon the dailyWorkingHours
+timeslots = [
+      "08:00-09:00",
+      "09:00-10:00",
+      "10:00-11:00",
+      "11:00-12:00",
+      "01:00-02:00",
+    ]
+days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+totalCreditHours = sum(creditHours)
+totalDailyWorkingHours = dailyWorkingHours*5
 
 
-TOURNAMENT_OF_POPULATION(population):
-    newTimeTablesPopulation = GENERATE_POPULATION_OF_TIMETABLES(populationSize,departmentId)
-    i = 0
-    while i < TOURNAMENT_SELECTION_SIZE:
-        newTimeTablesPopulation.append(population[random from 0 to POPULATION_SIZE])
-        i += 1
-    sort newTimeTablesPopulation according to fitness in reverse order
-    return newTimeTablesPopulation
+COURSECREDITHOURSDECEREMENTAL(courseName, courseNamesList){
+    for (m=1 to length of courseNameList) {
+      if (courseNamesList[m] is equal to courseName) {
+        if (parseInt(creditHoursList[m]) !== 0) {
+          creditHoursList[m] = creditHoursList[m] - 1;
+          break;
+        }
+      }
+    }
+  };
 
+INITILIZE(roomslist, cNames, cInstructors){
+    filter = 0;
+    if (totalCreditHours <= totalDailyWorkingHours) {
+      timeTable = [];
+      var index = 0;
+      for (var i = 0; i < creditHoursList.length; i++) {
+        for (u=1 to creditHoursList[i]) {
+          randomRoomNo = randomly selected roomNo from roomslist
+          randomTimeSlot = randomly selected timeslot from timeslots
+          randomDay = randomly selected day from days
 
-CROSSOVER_TIMETABLES(departmentId, timeTable1, timeTable2):
-    newCrossoverTimeTable = INITILIZE_TIMETABLE(departmentId)
-    for i in range(0, length of classes Array of newCrossoverTimeTable):
-        if random(0 to 1) > 0.5:
-            newCrossoverTimeTable.classes[i] = timeTable1.classes[i]
-        else:
-            newCrossoverTimeTable.classes[i] = timeTable2.classes[i]
-    return newCrossoverTimeTable
+          myclass = {
+            courseName: cNames[index]),
+            instructorName: cInstructors[index],
+            roomNo: randomRoomNo,
+            timeslot: randomTimeSlot,
+            day: randomDay,
+          }
+	Adding myclass into timeTable list
+        }
 
- CROSSOVER_POPULATION_OF_TIMETABLES(population,departmentId):
-    newCrossoverTimeTablesPopulation = GENERATE_POPULATION_OF_TIMETABLES(0,departmentId)
-    for i in range(NUMB_OF_ELITE_SCHEDULES):
-        crossover_pop.get_schedules().append(pop.get_schedules()[i])
-    i = NUMB_OF_ELITE_SCHEDULES
-    while i < POPULATION_SIZE:
-        timeTable = TOURNAMENT_OF_POPULATION(population)
-        timeTable1 = timeTable[0]
-        timeTable = TOURNAMENT_OF_POPULATION(population)
-        timeTable2 = timeTable[0]
-        newCrossoverTimeTablesPopulation.append(CROSSOVER_TIMETABLES(departmentId,timeTable1, timeTable2))
-        i += 1
-    return newCrossoverTimeTablesPopulation
+        index++;
+      }
+      if (checker == 0) {
+        timeTableValues = all values of timeTable[0] object
+	Adding timeTable[0] object into conflictsFreeTimeTable
 
-MUTATE_POPULATION_OF_TIMETABLES(departmentId,crossoverTimeTablesPopulation):
-for i in range(1, POPULATION_SIZE):
-    newMutatedTimeTable = GENERATE_TIMETABLE(departmentId)
-    for j in 1 to newmutatedTimeTable.classes.length:
-        if MUTATION_RATE > random(0 to 1):
-            crossoverTimeTablesPopulation[i].classes[j] = newMutatedTimeTable.classes[j]
-return crossoverTimeTablePopulation
+	COURSECREDITHOURSDECEREMENTAL(timeTableValues[0], cNames);
 
-EVALUATE(departmentId, population):
-    return MUTATE_POPULATION_OF_TIMETABLES(departmentId,CROSSOVER_POPULATION_OF_TIMETABLES(population,departmentId))
-
-
-GENETIC_ALGORITHM(departmentId):
-    timeTables = []
-    poplutaion = GENERATE_POPULATION_OF_TIMETABLES(POP_SIZE, departmentId)
-    sort timeTables in population according to fitness and also in reverse order
-    while poplutaion[0].fitness != 1:
-        poplutaion = EVALUATE(departmentId,poplutaion)
-        sort timetables in population according to fitness and also in reverse order
-    return poplutaion[0]
+        checker++;
+        INITILIZE(roomslist, cNames, cInstructors);
+      } else {
+        if (confilictsFreeTimeTable.length !== totalCreditHours) {          
+          for (k=1 to length timeTable) {
+            timeTableValuess = values of timeTable[k] object
+            for (g = 0 to length of confilictsFreeTimeTable) {
+              conflictsFreeTTValues = values of confilictsFreeTimeTable[g] object
+              if (conflictsFreeTTValues[3] is equal to timeTableValuess[3] and conflictsFreeTTValues[4].localeCompare(timeTableValuess[4]) {
+                if (conflictsFreeTTValues[2] is not equal to timeTableValuess[2])
+             	 {
+                  filter++;
+                }
+              } else {
+                filter++;
+              }
+            }
+            if (filter is equal to length of confilictsFreeTimeTable) {
+               Adding timeTable[k] to confilictsFreeTimeTabl array
+              COURSECREDITHOURSDECEREMENTAL(timeTableValuess[0], cNames)
+            }
+            filter = 0;
+          }
+          INITILIZE(roomslist, cNames, cInstructors);
+        }        
+        for (k = 1 to length of confilictsFreeTimeTable) {
+          values = values of confilictsFreeTimeTable[k] object
+          Adding values[0] in coursesProps array
+    	  Adding values[1] in instructorsProps array
+	  Adding values[2] in roomsProps array
+	  Adding values[3] in timeslotsProps array	 
+	  Adding values[4] in daysProps array
+	          
+        }
+      }
+    }
+    running++;
+    return confilictsFreeTimeTable
+  };
