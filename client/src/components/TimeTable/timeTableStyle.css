@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
+
+body {
+  margin: 0;
+  height: 100%;
+  background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.button_cont {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10%;
+}
+
+.description,
+.link {
+  font-family: "Amatic SC", cursive;
+  text-align: center;
+}
+
+.description {
+  font-size: 35px;
+}
+
+.newButton {
+  width: 300px;
+  height: 80px;
+  border: none;
+  display: grid;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 10;
+  font-size: 15px;
+
+  margin-top: -170px;
+  margin-left: 500px;
+  display: inline-block;
+  background-color: #222;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  padding-right: 40px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.newButton span {
+  position: relative;
+  z-index: 1;
+}
+
+.newButton:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #78c7d2;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.newButton:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.link {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+.link a {
+  color: #000;
+  font-size: 25px;
+}
