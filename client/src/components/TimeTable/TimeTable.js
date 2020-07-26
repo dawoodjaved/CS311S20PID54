@@ -24,7 +24,7 @@ const TimeTable = ({
     showingTimeTable = courses.map((course) => {
       runner++;
       return (
-        <tr className="row100 body">
+        <tr className="row106 body">
           <td>{days[runner]}</td>
           <td>{timeSlots[runner]}</td>
           <td>{rooms[runner]}</td>
@@ -46,18 +46,18 @@ const TimeTable = ({
         </button>
       </div>
       <div className="limiter">
-        <div className="container-table100">
-          <div className="wrap-table100">
-            <div className="table100 ver1 m-b-110">
-              <div className="table100-head">
+        <div className="container-table106">
+          <div className="wrap-table106">
+            <div className="table106 ver1 m-b-110">
+              <div className="table106-head">
                 <table>
                   <thead>
-                    <tr className="row100 head">
-                      <th className="cell100 column1">Day</th>
-                      <th className="cell100 column2">TimeSlot</th>
-                      <th className="cell100 column3">Room</th>
-                      <th className="cell100 column4">CourseName</th>
-                      <th className="cell100 column5">Instructor</th>
+                    <tr className="row106 head">
+                      <th className="cell106 column1">Day</th>
+                      <th className="cell106 column2">TimeSlot</th>
+                      <th className="cell106 column3">Room</th>
+                      <th className="cell106 column4">CourseName</th>
+                      <th className="cell106 column5">Instructor</th>
                     </tr>
                   </thead>
                 </table>

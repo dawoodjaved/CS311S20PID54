@@ -59,6 +59,7 @@ const ShowingAllRecords = (props) => {
     });
   }
   var showingDWHList = Object.values(showingDWHours);
+  console.log(showingDWHours[0]);
   var runner = -1;
   if (showingCoursesList) {
     var showingAllData = showingCoursesList.map((variableWithIndex) => {
@@ -67,8 +68,9 @@ const ShowingAllRecords = (props) => {
         <tr className="row100 body">
           <td>{variableWithIndex}</td>
           <td>{showingCreditHoursList[runner]}</td>
+          <td> {showingRoomsList ? showingRoomsList[runner] : "No Room"} </td>
           <td>{showingInstructorsList[runner]}</td>
-          <td>{showingDWHours[0]}</td>
+          <td>{showingDWHList[0]}</td>
         </tr>
       );
     });
