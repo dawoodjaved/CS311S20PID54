@@ -15,21 +15,40 @@ const TimeTable = ({
   timeSlots,
   days,
   algo,
+  allDays,
   isAuthenticatedAsProps,
 }) => {
   console.log(days);
   var runner = -1;
+  var sortedCourses = [];
+  var sortedRoomNumbers = [];
+  var sortedDays = [];
+  var sortedTimeSlots = [];
+  var sortedInstructors = [];
+
+  for (var i = 0; i < allDays.length; i++) {
+    for (var j = 0; j < days.length; j++) {
+      if (allDays[i] === days[j]) {
+        sortedCourses.push(courses[j]);
+        sortedRoomNumbers.push(rooms[j]);
+        sortedDays.push(days[j]);
+        sortedInstructors.push(instructors[j]);
+        sortedTimeSlots.push(timeSlots[j]);
+      }
+    }
+  }
+
   var showingTimeTable;
   if (courses) {
-    showingTimeTable = courses.map((course) => {
+    showingTimeTable = sortedCourses.map((course) => {
       runner++;
       return (
         <tr className="row106 body">
-          <td>{days[runner]}</td>
-          <td>{timeSlots[runner]}</td>
-          <td>{rooms[runner]}</td>
+          <td>{sortedDays[runner]}</td>
+          <td>{sortedTimeSlots[runner]}</td>
+          <td>{sortedRoomNumbers[runner]}</td>
           <td>{course}</td>
-          <td>{instructors[runner]}</td>
+          <td>{sortedInstructors[runner]}</td>
         </tr>
       );
     });

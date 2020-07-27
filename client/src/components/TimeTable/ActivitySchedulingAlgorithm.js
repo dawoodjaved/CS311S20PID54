@@ -322,13 +322,14 @@ const ActivitySchedulingAlgorithm = (props) => {
   };
   return (
     <div>
-      <TimeTable
+       <TimeTable
         algo={handleTable}
         courses={finalCourses}
         instructors={finalInstructors}
         rooms={finalRooms}
         timeSlots={finalTimeSlots}
         days={finalDays}
+        allDays={days}
       />
     </div>
   );
