@@ -68,9 +68,12 @@ const ShowingAllRecords = (props) => {
         <tr className="row100 body">
           <td>{variableWithIndex}</td>
           <td>{showingCreditHoursList[runner]}</td>
-          <td> {showingRoomsList ? showingRoomsList[runner] : "No Room"} </td>
+          <td>
+            {" "}
+            {showingRoomsList[runner] ? showingRoomsList[runner] : null}{" "}
+          </td>
           <td>{showingInstructorsList[runner]}</td>
-          <td>{showingDWHList[0]}</td>
+          <td>{runner === 0 ? showingDWHList[0] : null}</td>
         </tr>
       );
     });
