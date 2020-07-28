@@ -11,19 +11,19 @@ import { Redirect } from "react-router-dom";
 const DeleteAllRecords = (props) => {
   const handleCoursesDelete = () => {
     props.deleteCoursesActionAsProps();
-    toast.success("All Courses Deleted Successfully");
+    toast.success("You Deleted A Course Successfully");
   };
   const handleInstructorsDelete = () => {
     props.deleteInstructorsActionAsProps();
-    toast.success("All Instructors Deleted Successfully");
+    toast.success("You Deleted An Instructor Successfully");
   };
   const handleDWHoursDelete = () => {
     props.deleteDWHoursActionAsProps();
-    toast.success("All DailyWorkingHours Deleted Successfully");
+    toast.success("You Deleted A DailyWorkingHour Successfully");
   };
   const handleRoomsDelete = () => {
     props.deleteRoomsActionAsProps();
-    toast.success("All Rooms Deleted Successfully");
+    toast.success("You Deleted A Room Successfully");
   };
   if (!props.isAuthenticatedAsProps) {
     return <Redirect to="/" />;
