@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 
 import PostDWHoursAction from "../../store/action/AddingRecordsAction/DWHoursAction/AddingDWHoursAction";
 import clearErrorsAction from "../../store/action/ErrorActions/ClearErrorsAction";
+import FetchAllDWHoursAction from "../../store/action/AddingRecordsAction/DWHoursAction/FetchAllDWHoursAction";
 
 const Login = (props) => {
   const [dailyWorkingHours, setDailyWorkingHours] = useState("");
@@ -16,19 +17,24 @@ const Login = (props) => {
 
   useEffect(() => {
     props.clrErrrorsActionAsProps();
+    props.fetchDWHoursActionAsProps();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (dailyWorkingHours) {
-      //new user object.
-      const newObject = {
-        dailyWorkingHours,
-      };
-      props.addDWHoursActionAsProps(newObject);
-      setDailyWorkingHours("");
+      if (props.dwHoursProps.length === 0) {
+        //new user object.
+        const newObject = {
+          dailyWorkingHours,
+        };
+        props.addDWHoursActionAsProps(newObject);
+        setDailyWorkingHours("");
 
-      toast.success("You Added DailyWorkingHours Successfully.");
+        toast.success("You Added DailyWorkingHours Successfully.");
+      } else {
+        toast.error("Sorry You Already Added Daily Working Hours");
+      }
     } else {
       toast.error("Please fill all fields");
     }
@@ -80,12 +86,16 @@ const Login = (props) => {
 const mapStateToProps = (state) => ({
   isAuthenticatedAsProps: state.userAuthReducer.isAuthenticated,
   errorAsProps: state.errorReducer,
+  dwHoursProps: state.recordsReducer.dWHoursList,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addDWHoursActionAsProps: (data) => {
       dispatch(PostDWHoursAction(data));
+    },
+    fetchDWHoursActionAsProps: () => {
+      dispatch(FetchAllDWHoursAction());
     },
     clrErrrorsActionAsProps: () => {
       dispatch(clearErrorsAction());

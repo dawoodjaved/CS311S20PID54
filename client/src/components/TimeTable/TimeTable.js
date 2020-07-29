@@ -64,6 +64,7 @@ const TimeTable = ({
           <span>Generate TimeTable</span>
         </button>
       </div>
+
       <div className="limiter">
         <div className="container-table106">
           <div className="wrap-table106">

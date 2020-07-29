@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 
 import PostRoomsAction from "../../store/action/AddingRecordsAction/RoomsActions/AddingRoomsAction";
 import clearErrorsAction from "../../store/action/ErrorActions/ClearErrorsAction";
+import FetchAllRoomsAction from "../../store/action/AddingRecordsAction/RoomsActions/FetchAllRoomsAction";
 
 const AddingRooms = (props) => {
   const [roomNo, setRoomNo] = useState("");
@@ -15,21 +16,42 @@ const AddingRooms = (props) => {
 
   useEffect(() => {
     props.clrErrrorsActionAsProps();
+    props.fetchRoomsActionAsProps();
   }, []);
+
+  var checker = 0;
+  var RoomsList;
+
+  if (props.roomsProps) {
+    RoomsList = props.roomsProps.map((vari) => {
+      return String(vari.roomNo);
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    for (var i = 0; i < RoomsList.length; i++) {
+      if (roomNo === RoomsList[i]) {
+        checker = 1;
+      }
+    }
+
     if (roomNo) {
-      //new user object.
-      const newRoom = {
-        roomNo,
-      };
+      if (checker === 0) {
+        //new user object.
+        const newRoom = {
+          roomNo,
+        };
 
-      // Add user via loginUserActionAsProps
-      props.addRoomsActionAsProps(newRoom);
-      setRoomNo("");
+        // Add user via loginUserActionAsProps
+        props.addRoomsActionAsProps(newRoom);
+        setRoomNo("");
 
-      toast.success("You Added A Room Successfully.");
+        toast.success("You Added A Room Successfully.");
+      } else {
+        checker = 0;
+        toast.error("Sorry This Room is Already Present.");
+      }
     } else {
       toast.error("Please fill all fields");
     }
@@ -77,12 +99,16 @@ const AddingRooms = (props) => {
 const mapStateToProps = (state) => ({
   isAuthenticatedAsProps: state.userAuthReducer.isAuthenticated,
   errorAsProps: state.errorReducer,
+  roomsProps: state.recordsReducer.roomsList,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addRoomsActionAsProps: (data) => {
       dispatch(PostRoomsAction(data));
+    },
+    fetchRoomsActionAsProps: () => {
+      dispatch(FetchAllRoomsAction());
     },
     clrErrrorsActionAsProps: () => {
       dispatch(clearErrorsAction());

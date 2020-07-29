@@ -195,14 +195,13 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
 .limiter {
-  width: 100%;
+  width: 10%;
   margin: 0 auto;
-  margin-top: 0;
 }
 
 .container-login100 {
   width: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -215,6 +214,7 @@ iframe {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  margin-top: -60px;
 }
 
 .wrap-login100 {
