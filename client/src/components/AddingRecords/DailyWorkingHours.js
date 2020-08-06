@@ -23,17 +23,21 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (dailyWorkingHours) {
-      if (props.dwHoursProps.length === 0) {
-        //new user object.
-        const newObject = {
-          dailyWorkingHours,
-        };
-        props.addDWHoursActionAsProps(newObject);
-        setDailyWorkingHours("");
+      if (isNaN(dailyWorkingHours) === false) {
+        if (props.dwHoursProps.length === 0) {
+          //new user object.
+          const newObject = {
+            dailyWorkingHours,
+          };
+          props.addDWHoursActionAsProps(newObject);
+          setDailyWorkingHours("");
 
-        toast.success("You Added DailyWorkingHours Successfully.");
+          toast.success("You Added DailyWorkingHours Successfully.");
+        } else {
+          toast.error("Sorry You Already Added Daily Working Hours");
+        }
       } else {
-        toast.error("Sorry You Already Added Daily Working Hours");
+        toast.error("Sorry Daily Working Hours must be a number");
       }
     } else {
       toast.error("Please fill all fields");

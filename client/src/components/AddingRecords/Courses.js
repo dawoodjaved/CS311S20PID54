@@ -78,26 +78,30 @@ const AddingCourses = (props) => {
     }
     if (courseName && creditHours && instructorName) {
       if (checker === 0) {
-        if (creditHoursChecker <= numDWHours) {
-          //new user object.
-          const newCourse = {
-            courseName,
-            creditHours,
-            instructorName,
-          };
-          // Add courses via addCoursesActionAsProps
-          props.addCoursesActionAsProps(newCourse);
-          setCourseName("");
-          setInstructorName("");
-          setCreditHours("");
+        if (isNaN(creditHours) === false) {
+          if (creditHoursChecker <= numDWHours) {
+            //new user object.
+            const newCourse = {
+              courseName,
+              creditHours,
+              instructorName,
+            };
+            // Add courses via addCoursesActionAsProps
+            props.addCoursesActionAsProps(newCourse);
+            setCourseName("");
+            setInstructorName("");
+            setCreditHours("");
 
-          toast.success("You Added A Course Successfully.");
+            toast.success("You Added A Course Successfully.");
+          } else {
+            toast.error(
+              `Sorry Now You Can Add Only ${
+                numDWHours - totalCreditHours
+              } More Credit Hours`
+            );
+          }
         } else {
-          toast.error(
-            `Sorry Now You Can Add Only ${
-              numDWHours - totalCreditHours
-            } More Credit Hours`
-          );
+          toast.error("Sorry Credit Hours must be a number");
         }
       } else {
         checker = 0;
