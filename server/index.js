@@ -2,6 +2,7 @@ require("./db");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 //process.env.Port will check either 4000 port is empty or in used otherwise it will use another port;
 const Port = process.env.Port || 4000;
@@ -31,5 +32,14 @@ app.use("/api", addCourseRoutes);
 app.use("/api", addDWHoursRoutes);
 app.use("/api", timeTableRoutes);
 app.use("/api", addRoomsRoutes);
+
+//WHEN setting to heruko.
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendfile(path.resolve(__dirname, "clinet", "build", "index.html"));
+  });
+}
 
 app.listen(Port, () => console.log("server listening at localhost:4000"));
