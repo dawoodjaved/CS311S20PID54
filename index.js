@@ -38,13 +38,4 @@ app.use("/api", addDWHoursRoutes);
 app.use("/api", timeTableRoutes);
 app.use("/api", addRoomsRoutes);
 
-//WHEN setting to heruko.
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
-
 app.listen(Port, () => console.log("server listening at localhost:4000"));
