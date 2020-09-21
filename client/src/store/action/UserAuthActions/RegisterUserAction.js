@@ -12,7 +12,10 @@ export const registerUserAction = ({ name, email, password }) => (dispatch) => {
   // Request body
   const body = JSON.stringify({ name, email, password });
 
-  const baseUrl = "http://localhost:4000/";
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://rocky-chamber-92397.herokuapp.com/"
+      : "http://localhost:4000/";
 
   axios
     .post(baseUrl + "api/user/register", body, config)
