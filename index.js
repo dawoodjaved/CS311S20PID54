@@ -5,7 +5,7 @@ const cors = require("cors");
 const path = require("path");
 
 //process.env.Port will check either 4000 port is empty or in used otherwise it will use another port;
-const Port = process.env.Port || 4000;
+const Port = process.env.PORT || 4000;
 
 const app = express();
 
