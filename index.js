@@ -17,7 +17,11 @@ app.use(bodyParser.json());
 //node will block the requests made by the other port numbers
 //except 4000
 //therefore we use cors to enable requests form other ports.
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://nameless-dawn-92391.herokuapp.com",
+  })
+);
 
 var addCourseRoutes = require("./routes/AddCourseRoutes");
 var addDWHoursRoutes = require("./routes/AddDWHoursRoutes");
