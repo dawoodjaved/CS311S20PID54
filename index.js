@@ -17,12 +17,7 @@ app.use(bodyParser.json());
 //node will block the requests made by the other port numbers
 //except 4000
 //therefore we use cors to enable requests form other ports.
-app.use(
-  cors({
-    origin:
-      "https://5f681b03e79c6435c139c441--time-table-scheduler.netlify.app/",
-  })
-);
+app.use(cors());
 
 var addCourseRoutes = require("./routes/AddCourseRoutes");
 var addDWHoursRoutes = require("./routes/AddDWHoursRoutes");
