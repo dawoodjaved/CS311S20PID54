@@ -17,11 +17,7 @@ app.use(bodyParser.json());
 //node will block the requests made by the other port numbers
 //except 4000
 //therefore we use cors to enable requests form other ports.
-app.use(
-  cors({
-    origin: "https://nameless-dawn-92391.herokuapp.com",
-  })
-);
+app.use(cors());
 
 var addCourseRoutes = require("./routes/AddCourseRoutes");
 var addDWHoursRoutes = require("./routes/AddDWHoursRoutes");
@@ -36,5 +32,14 @@ app.use("/api", addCourseRoutes);
 app.use("/api", addDWHoursRoutes);
 app.use("/api", timeTableRoutes);
 app.use("/api", addRoomsRoutes);
+
+//WHEN setting to heruko.
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 app.listen(Port, () => console.log("server listening at localhost:4000"));
